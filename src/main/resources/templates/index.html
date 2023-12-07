@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        crossorigin="anonymous">
+
+    <!-- Add Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        crossorigin="anonymous">
+</head>
+<body>
+    <div th:switch="${users}">
+        <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            <div class="text-center">
+                <h2 class="text-danger">Users</h2>
+            </div>
+            <div class="table-responsive"> <!-- Add this div for responsiveness -->
+                <table class="table table-bordered table-striped mx-auto" style="width: 75%;">
+                    <!-- Add table-bordered and table-striped classes, and style for width -->
+                    <thead class="thead-dark"> <!-- Add dark background color to the header -->
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+			<div class="float-left mb-12">
+            <a href="/signup" class="btn btn-success">
+                <i class="fas fa-user-plus mx-auto"></i> Add a new user
+            </a>
+            </div>
+        </p>
+    </div>
+
+    <!-- Add Bootstrap and Font Awesome scripts (if not already included) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJ6/RG46T6oBZaR8fo8en" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy3uq4wQhku4xSLqapE9PSSUn6d28Cqfa" crossorigin="anonymous"></script>
+</body>
+</html>
